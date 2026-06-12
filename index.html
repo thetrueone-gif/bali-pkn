@@ -196,7 +196,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="beranda">
   <div class="wrap">
     <span class="eyebrow">Provinsi Bali • Indonesia</span>
@@ -210,7 +209,6 @@
   <div class="scroll-ind"><div class="mouse"></div>SCROLL</div>
 </section>
 
-<!-- TENTANG -->
 <section id="tentang">
   <div class="wrap about">
     <div class="imgs reveal">
@@ -231,7 +229,6 @@
   </div>
 </section>
 
-<!-- SEJARAH -->
 <section id="sejarah" style="background:#fff">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow">Lini Masa</span><h2>Jejak Sejarah Bali</h2><div class="divider"></div></div>
@@ -244,7 +241,6 @@
   </div>
 </section>
 
-<!-- BUDAYA -->
 <section id="budaya">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow">Warisan Leluhur</span><h2>Budaya &amp; Adat Istiadat</h2><div class="divider"></div><p>Tradisi yang dijaga turun-temurun dan tetap hidup di keseharian.</p></div>
@@ -256,7 +252,6 @@
   </div>
 </section>
 
-<!-- KULINER -->
 <section id="kuliner" class="food">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow">Cita Rasa</span><h2>Kuliner Khas Bali</h2><div class="divider"></div></div>
@@ -269,7 +264,6 @@
   </div>
 </section>
 
-<!-- WISATA / GALLERY -->
 <section id="wisata">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow">Destinasi</span><h2>Galeri Wisata Bali</h2><div class="divider"></div><p>Dari pantai legendaris hingga pura di tepi laut.</p></div>
@@ -283,7 +277,6 @@
   </div>
 </section>
 
-<!-- NILAI PKN -->
 <section id="nilai" class="values">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow" style="color:var(--gold-soft)">Pendidikan Kewarganegaraan</span><h2>Nilai Luhur dari Bali</h2><div class="divider"></div><p>Bagaimana Bali mencerminkan nilai-nilai kebangsaan Indonesia.</p></div>
@@ -296,7 +289,6 @@
   </div>
 </section>
 
-<!-- QUOTE -->
 <section class="quote">
   <div class="wrap reveal">
     <blockquote>“Bali bukan sekadar destinasi, melainkan cerminan bagaimana keberagaman dapat hidup harmonis dalam satu Indonesia.”</blockquote>
@@ -304,7 +296,6 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq" style="background:#fff">
   <div class="wrap">
     <div class="head reveal"><span class="eyebrow">Tanya Jawab</span><h2>Pertanyaan Umum</h2><div class="divider"></div></div>
@@ -316,7 +307,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="f-grid">
@@ -337,48 +327,49 @@
   </div>
 </footer>
 
-<button id="top" title="Ke atas">↑</button>
+<button id="scroll-to-top-btn" title="Ke atas">↑</button>
 
 <script>
-  // Navbar scroll state
-  const head=document.getElementById('site-head');
-  const top=document.getElementById('top');
-  addEventListener('scroll',()=>{
-    head.classList.toggle('scrolled',scrollY>60);
-    top.classList.toggle('show',scrollY>500);
+  // Navbar scroll state & To Top Button
+  const head = document.getElementById('site-head');
+  const toTopBtn = document.getElementById('scroll-to-top-btn'); // Mengganti nama dari 'top' menjadi 'toTopBtn'
+  
+  addEventListener('scroll', () => {
+    head.classList.toggle('scrolled', scrollY > 60);
+    toTopBtn.classList.toggle('show', scrollY > 500);
   });
-  top.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+  toTopBtn.onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
   // Mobile menu
-  const burger=document.getElementById('burger'), menu=document.getElementById('menu');
-  burger.onclick=()=>menu.classList.toggle('open');
-  menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
+  const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.onclick = () => menu.classList.toggle('open');
+  menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove('open'));
 
   // Scroll reveal
-  const io=new IntersectionObserver((es)=>es.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
-  }),{threshold:.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const io = new IntersectionObserver((es) => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   // Counter animation
-  const counters=document.querySelectorAll('.num[data-count]');
-  const cio=new IntersectionObserver((es)=>es.forEach(e=>{
-    if(!e.isIntersecting) return;
-    const el=e.target, target=+el.dataset.count, suffix=el.dataset.suffix||'';
-    let cur=0; const step=Math.max(1,Math.ceil(target/60));
-    const t=setInterval(()=>{
-      cur+=step; if(cur>=target){cur=target;clearInterval(t);}
-      el.textContent=cur.toLocaleString('id-ID')+suffix;
-    },22);
+  const counters = document.querySelectorAll('.num[data-count]');
+  const cio = new IntersectionObserver((es) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    let cur = 0; const step = Math.max(1, Math.ceil(target / 60));
+    const t = setInterval(() => {
+      cur += step; if (cur >= target) { cur = target; clearInterval(t); }
+      el.textContent = cur.toLocaleString('id-ID') + suffix;
+    }, 22);
     cio.unobserve(el);
-  }),{threshold:.6});
-  counters.forEach(c=>cio.observe(c));
+  }), { threshold: .6 });
+  counters.forEach(c => cio.observe(c));
 
   // FAQ accordion
-  document.querySelectorAll('.acc-q').forEach(q=>q.onclick=()=>{
-    const acc=q.parentElement, a=acc.querySelector('.acc-a');
-    const open=acc.classList.toggle('open');
-    a.style.maxHeight=open?a.scrollHeight+'px':0;
+  document.querySelectorAll('.acc-q').forEach(q => q.onclick = () => {
+    const acc = q.parentElement, a = acc.querySelector('.acc-a');
+    const open = acc.classList.toggle('open');
+    a.style.maxHeight = open ? a.scrollHeight + 'px' : 0;
   });
 </script>
 </body>
